@@ -39,14 +39,16 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<ConsumerProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+  const supabase = supabaseUrl && supabaseKey
+    ? createClient(supabaseUrl, supabaseKey)
+    : null;
 
   // Initialize auth state and load profile on mount
   useEffect(() => {
     const initAuth = async () => {
+      if (!supabase) { setLoading(false); return; }
       try {
         const {
           data: { user: currentUser },
@@ -67,6 +69,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
     initAuth();
 
     // Subscribe to auth changes
+    if (!supabase) return;
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setUser(session?.user || null);
@@ -83,6 +86,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Load or create consumer profile
   const loadProfile = async (userId: string) => {
+    if (!supabase) return;
     try {
       const { data: existingProfile, error } = await supabase
         .from('consumer_profiles')
@@ -133,6 +137,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Sign in with email/password
   const signIn = async (email: string, password: string) => {
+    if (!supabase) throw new Error("Auth not configured");
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
@@ -163,6 +168,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Sign out
   const signOut = async () => {
+    if (!supabase) return;
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
@@ -175,6 +181,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Update profile
   const updateProfile = async (updates: Partial<ConsumerProfile>) => {
+    if (!supabase || !user) return;
     if (!user) return;
 
     try {
