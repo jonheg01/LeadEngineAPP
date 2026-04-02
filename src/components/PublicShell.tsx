@@ -78,6 +78,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Home Equity Guide", href: "/home-equity-guide" },
     { label: "RE Glossary", href: "/real-estate-glossary" },
     { label: "Neighborhood Safety", href: "/neighborhood-safety" },
+    { label: "Maintenance Calendar", href: "/home-maintenance-calendar" },
+    { label: "Choose an Agent", href: "/choose-an-agent" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
