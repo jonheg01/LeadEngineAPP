@@ -60,6 +60,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Green Homes", href: "/green-homes" },
     { label: "Multi-Generational", href: "/multi-generational" },
     { label: "Renovation ROI", href: "/renovation-roi" },
+    { label: "Pet-Friendly Homes", href: "/pet-friendly" },
+    { label: "Smart Homes", href: "/smart-homes" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
