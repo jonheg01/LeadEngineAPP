@@ -7,6 +7,7 @@ import { useConsumerFeatures } from '@/hooks/useConsumerFeatures';
 import { useMobile } from '@/hooks/useMobile';
 import { Card, Button, Input, Icon } from '@/components/design-system';
 import PublicShell from '@/components/PublicShell';
+import { createClient } from '@supabase/supabase-js';
 
 // ═══════════════════════════════════════════════════════════
 // Account page: Consumer login/signup with saved searches
@@ -25,6 +26,28 @@ export default function AccountPage() {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Google OAuth handler
+  const handleGoogleSignIn = async () => {
+    try {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      if (!supabaseUrl || !supabaseKey) {
+        setError('Authentication is not configured');
+        return;
+      }
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/account`,
+        },
+      });
+      if (error) throw error;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Google sign in failed');
+    }
+  };
 
   // If logged in, show account details
   if (!loading && user && profile) {
@@ -308,14 +331,14 @@ export default function AccountPage() {
                     type="email"
                     placeholder="Email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={setEmail}
                     required
                   />
                   <Input
                     type="password"
                     placeholder="Password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={setPassword}
                     required
                   />
 
@@ -345,6 +368,7 @@ export default function AccountPage() {
                     variant="secondary"
                     fullWidth
                     icon="globe"
+                    onClick={handleGoogleSignIn}
                   >
                     Continue with Google
                   </Button>
@@ -360,21 +384,21 @@ export default function AccountPage() {
                     type="text"
                     placeholder="Full name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={setName}
                     required
                   />
                   <Input
                     type="email"
                     placeholder="Email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={setEmail}
                     required
                   />
                   <Input
                     type="password"
                     placeholder="Password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={setPassword}
                     required
                   />
 
@@ -404,6 +428,7 @@ export default function AccountPage() {
                     variant="secondary"
                     fullWidth
                     icon="globe"
+                    onClick={handleGoogleSignIn}
                   >
                     Continue with Google
                   </Button>

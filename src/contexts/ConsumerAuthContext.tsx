@@ -47,8 +47,12 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Initialize auth state and load profile on mount
   useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+
     const initAuth = async () => {
-      if (!supabase) { setLoading(false); return; }
       try {
         const {
           data: { user: currentUser },
@@ -69,7 +73,6 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
     initAuth();
 
     // Subscribe to auth changes
-    if (!supabase) return;
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setUser(session?.user || null);
@@ -137,7 +140,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Sign in with email/password
   const signIn = async (email: string, password: string) => {
-    if (!supabase) throw new Error("Auth not configured");
+    if (!supabase) throw new Error('Authentication is not configured');
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
@@ -149,6 +152,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Sign up with name, email, password
   const signUp = async (name: string, email: string, password: string) => {
+    if (!supabase) throw new Error('Authentication is not configured');
     try {
       const { error } = await supabase.auth.signUp({
         email,
@@ -181,8 +185,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
 
   // Update profile
   const updateProfile = async (updates: Partial<ConsumerProfile>) => {
-    if (!supabase || !user) return;
-    if (!user) return;
+    if (!user || !supabase) return;
 
     try {
       const { data, error } = await supabase
