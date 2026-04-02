@@ -277,7 +277,7 @@ export default function AccountPage() {
             </div>
 
             {/* Tab buttons */}
-            <div style={{ display: 'flex', gap: 12, marginBottom: 32 }}>
+            <div style={{ display: 'flex', gap: 4, marginBottom: 32, background: 'var(--le-bg-surface-2)', borderRadius: 'var(--le-radius-lg)', padding: 4 }}>
               <button
                 onClick={() => {
                   setTab('signin');
@@ -285,15 +285,17 @@ export default function AccountPage() {
                 }}
                 style={{
                   flex: 1,
-                  padding: '12px 16px',
-                  fontSize: 14,
-                  fontWeight: 600,
+                  padding: '14px 16px',
+                  fontSize: 16,
+                  fontWeight: tab === 'signin' ? 700 : 500,
                   border: 'none',
                   borderRadius: 'var(--le-radius-md)',
                   cursor: 'pointer',
-                  background: tab === 'signin' ? 'var(--le-primary)' : 'var(--le-bg-surface-2)',
-                  color: tab === 'signin' ? '#ffffff' : 'var(--le-text-primary)',
+                  background: tab === 'signin' ? 'var(--le-primary)' : 'transparent',
+                  color: tab === 'signin' ? '#ffffff' : 'var(--le-text-tertiary)',
+                  boxShadow: tab === 'signin' ? '0 2px 8px rgba(19, 48, 41, 0.3)' : 'none',
                   transition: 'all var(--le-transition-fast)',
+                  letterSpacing: tab === 'signin' ? '0.02em' : '0',
                 }}
               >
                 Sign In
@@ -305,15 +307,17 @@ export default function AccountPage() {
                 }}
                 style={{
                   flex: 1,
-                  padding: '12px 16px',
-                  fontSize: 14,
-                  fontWeight: 600,
+                  padding: '14px 16px',
+                  fontSize: 16,
+                  fontWeight: tab === 'signup' ? 700 : 500,
                   border: 'none',
                   borderRadius: 'var(--le-radius-md)',
                   cursor: 'pointer',
-                  background: tab === 'signup' ? 'var(--le-primary)' : 'var(--le-bg-surface-2)',
-                  color: tab === 'signup' ? '#ffffff' : 'var(--le-text-primary)',
+                  background: tab === 'signup' ? 'var(--le-primary)' : 'transparent',
+                  color: tab === 'signup' ? '#ffffff' : 'var(--le-text-tertiary)',
+                  boxShadow: tab === 'signup' ? '0 2px 8px rgba(19, 48, 41, 0.3)' : 'none',
                   transition: 'all var(--le-transition-fast)',
+                  letterSpacing: tab === 'signup' ? '0.02em' : '0',
                 }}
               >
                 Create Account
