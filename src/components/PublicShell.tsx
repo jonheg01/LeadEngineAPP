@@ -50,6 +50,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Escrow Guide", href: "/escrow-guide" },
     { label: "Title Insurance", href: "/title-insurance" },
     { label: "Home Staging", href: "/home-staging" },
+    { label: "VA Home Buying", href: "/veteran-home-buyer" },
+    { label: "Senior Moving Guide", href: "/senior-moving-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
