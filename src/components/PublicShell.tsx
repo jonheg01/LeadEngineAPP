@@ -74,6 +74,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Refinance Guide", href: "/refinance-guide" },
     { label: "Home Buying Myths", href: "/home-buying-myths" },
     { label: "Seasonal Buying Guide", href: "/seasonal-buying-guide" },
+    { label: "Moving With Pets", href: "/moving-with-pets" },
+    { label: "Home Equity Guide", href: "/home-equity-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
