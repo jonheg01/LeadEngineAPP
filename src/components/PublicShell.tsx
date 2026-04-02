@@ -72,6 +72,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Home Insurance Guide", href: "/home-insurance-guide" },
     { label: "Appraisal Process", href: "/appraisal-process" },
     { label: "Refinance Guide", href: "/refinance-guide" },
+    { label: "Home Buying Myths", href: "/home-buying-myths" },
+    { label: "Seasonal Buying Guide", href: "/seasonal-buying-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
