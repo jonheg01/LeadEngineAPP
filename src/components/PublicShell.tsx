@@ -48,6 +48,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "HOA Guide", href: "/hoa-guide" },
   { label: "Mortgage Types", href: "/mortgage-types" },
   { label: "Escrow Guide", href: "/escrow-guide" },
+    { label: "Title Insurance", href: "/title-insurance" },
+    { label: "Home Staging", href: "/home-staging" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
