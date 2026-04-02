@@ -62,6 +62,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Renovation ROI", href: "/renovation-roi" },
     { label: "Pet-Friendly Homes", href: "/pet-friendly" },
     { label: "Smart Homes", href: "/smart-homes" },
+    { label: "Remote Work Homes", href: "/remote-work-homes" },
+    { label: "Historic Homes", href: "/historic-homes" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
