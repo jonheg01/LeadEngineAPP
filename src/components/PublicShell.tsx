@@ -66,6 +66,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Historic Homes", href: "/historic-homes" },
     { label: "Downsizing Guide", href: "/downsizing-guide" },
     { label: "Home Office Guide", href: "/home-office-guide" },
+    { label: "Eco-Friendly Living", href: "/eco-friendly-living" },
+    { label: "First-Time Investor", href: "/first-time-investor" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
