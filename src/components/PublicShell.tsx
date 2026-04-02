@@ -70,6 +70,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "First-Time Investor", href: "/first-time-investor" },
     { label: "Relocation Checklist", href: "/relocation-checklist" },
     { label: "Home Insurance Guide", href: "/home-insurance-guide" },
+    { label: "Appraisal Process", href: "/appraisal-process" },
+    { label: "Refinance Guide", href: "/refinance-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
