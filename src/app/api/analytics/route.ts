@@ -55,19 +55,20 @@ export async function POST(req: NextRequest) {
 
     // Attempt to insert into analytics_logs table
     // If table doesn't exist yet, operation will fail silently (fire-and-forget)
-    await supabase
+    const { error: insertError } = await supabase
       .from("analytics_logs")
-      .insert(analyticsLog)
-      .catch((error) => {
-        // Log to console for debugging (table may not exist yet)
-        console.log("Analytics event logged:", {
-          event: analyticsLog.event,
-          category: analyticsLog.category,
-          action: analyticsLog.action,
-          value: analyticsLog.value,
-          timestamp: analyticsLog.timestamp,
-        });
+      .insert(analyticsLog);
+
+    if (insertError) {
+      // Log to console for debugging (table may not exist yet)
+      console.log("Analytics event logged:", {
+        event: analyticsLog.event,
+        category: analyticsLog.category,
+        action: analyticsLog.action,
+        value: analyticsLog.value,
+        timestamp: analyticsLog.timestamp,
       });
+    }
 
     // Fire-and-forget: always return success immediately
     return NextResponse.json({ success: true });
