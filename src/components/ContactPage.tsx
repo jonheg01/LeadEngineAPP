@@ -379,7 +379,7 @@ export default function ContactPage() {
 
             {/* Contact Info Sidebar */}
             <div style={{ opacity: formVisible ? 1 : 0, transition: "all 0.6s ease", transitionDelay: "0.1s" }}>
-              <div style={{ stickyTop: 100, position: "sticky", top: 100 }}>
+              <div style={{ position: "sticky", top: 100 }}>
                 <div style={{ marginBottom: 32 }}>
                   <h3 style={{ fontSize: 16, fontWeight: 600, color: "var(--le-text-primary)", marginBottom: 16 }}>
                     Contact Information
