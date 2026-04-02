@@ -119,7 +119,7 @@ Once pre-approved, your offer becomes significantly more attractive to sellers. 
 
 10. **Safety Features** — Handrails, stairs, carbon monoxide and smoke detectors. Required for safety and often for insurance.
 
-Budget $300-500 for a standard inspection. It's the best investment you'll make before closing.`,
+Budget $300-500 for a standard inspection. It's the best investment you’ll make before closing.`,
       category: 'Buying',
       readTime: '8 min',
     },
@@ -127,7 +127,7 @@ Budget $300-500 for a standard inspection. It's the best investment you'll make 
       id: 'closing-costs',
       title: 'Understanding Closing Costs: A Complete Breakdown',
       preview: 'Demystify the fees that appear at closing and learn why they exist and what you can negotiate.',
-      content: `Closing costs catch many buyers off guard. They typically range from 2-5% of your home's purchase price. Understanding each line item helps you budget accurately and spot unusual charges.
+      content: `Closing costs catch many buyers off guard. They typically range from 2-5% of your home’s purchase price. Understanding each line item helps you budget accurately and spot unusual charges.
 
 **Lender Fees** (1-3% of loan amount)
 • Loan origination fee: Covers underwriting, processing, and loan setup
@@ -153,7 +153,7 @@ Budget $300-500 for a standard inspection. It's the best investment you'll make 
 • Survey: Sometimes required, $300-500
 
 **Negotiation Tips:**
-Ask the seller to cover some costs (common in buyer's market). Compare quotes from multiple title companies—they can vary significantly. Some lenders charge inflated processing fees; shop around.
+Ask the seller to cover some costs (common in buyer’s market). Compare quotes from multiple title companies—they can vary significantly. Some lenders charge inflated processing fees; shop around.
 
 Request a Closing Disclosure 3 days before closing to review and catch errors. This legal document outlines every fee and is your chance to question anything that seems high or unexplained.`,
       category: 'Buying',
@@ -166,13 +166,13 @@ Request a Closing Disclosure 3 days before closing to review and catch errors. T
       content: `The Phoenix metro market has evolved dramatically over the past 18 months. Understanding current conditions helps you make strategic decisions about timing and pricing.
 
 **Market Snapshot (Q1 2026)**
-The Phoenix area remains a seller's market overall, but conditions vary significantly by price point and neighborhood. Median home price sits at $485,000, with price appreciation at 4.2% year-over-year—significantly slower than the boom years but still solid growth.
+The Phoenix area remains a seller’s market overall, but conditions vary significantly by price point and neighborhood. Median home price sits at $485,000, with price appreciation at 4.2% year-over-year—significantly slower than the boom years but still solid growth.
 
 **Neighborhood Trends**
 Tempe, South Scottsdale, and central Phoenix neighborhoods continue attracting younger buyers seeking walkability and urban amenities. Suburban areas like Chandler, Gilbert, and North Scottsdale appeal to families seeking schools and space.
 
 **Inventory Situation**
-Active listings have increased to 12,450 inventory units, giving buyers more choices than 2024. Days on market average 28 days—up from 15-20 in 2023 but still a seller's advantage.
+Active listings have increased to 12,450 inventory units, giving buyers more choices than 2024. Days on market average 28 days—up from 15-20 in 2023 but still a seller’s advantage.
 
 **Interest Rate Impact**
 With the 30-year mortgage rate at 6.25%, affordability remains challenged. A $400,000 home with 20% down costs roughly $2,300/month. This pushes many buyers toward condos, townhomes, or lower price points.
@@ -195,7 +195,7 @@ The market is normalizing after the pandemic surge. Smart decisions matter more 
       content: `Real estate commissions are often misunderstood. The standard 5-6% total (split between buyer\'s and seller\'s agent) has been standard for decades, but recent industry changes are shifting this landscape.
 
 **How Commissions Work**
-Traditionally, the seller pays one 6% commission (sometimes 5-5.5%), which is split: 3% to the seller's agent, 3% to the buyer's agent. On a $500,000 home, that's $30,000 total.
+Traditionally, the seller pays one 6% commission (sometimes 5-5.5%), which is split: 3% to the seller’s agent, 3% to the buyer’s agent. On a $500,000 home, that’s $30,000 total.
 
 However, the buyer\'s agent doesn\'t come from your pocket directly if you\'re buying—it comes from the seller\'s proceeds. As a seller, the cost is real and negotiable.
 
@@ -210,7 +210,7 @@ A good agent provides:
 
 **Negotiating Commission**
 Commission is always negotiable. Factors that influence rates:
-• Market conditions (buyer's market = lower commissions)
+• Market conditions (buyer’s market = lower commissions)
 • Price point (higher prices sometimes = lower percentage)
 • Complexity of sale
 • Local market norms (varies by region)
@@ -230,7 +230,7 @@ A good agent earns their commission through negotiation skills, market knowledge
     {
       id: 'staging-budget',
       title: 'Home Staging on a Budget: 15 Tips That Work',
-      preview: 'Dramatically improve your home's appeal and sale price with inexpensive staging fixes that buyers respond to.',
+      preview: 'Dramatically improve your home\u2019s appeal and sale price with inexpensive staging fixes that buyers respond to.',
       content: `Professional staging costs $2,000-5,000+, but you can achieve 80% of the results with budget-friendly tactics. Studies show staged homes sell 73% faster and for 6% more.
 
 **Quick Wins (Under $100)**
@@ -282,7 +282,7 @@ The ROI on staging is typically 5-10x your investment through faster sales and h
       content: `Bidding wars are stressful, but winning the right way requires strategy, not just throwing money at the problem. Here's how to compete effectively:
 
 **Pre-War Preparation**
-Get pre-approved (not just pre-qualified) before making offers. Sellers take this seriously—it shows you're buyer-ready. Include pre-approval letter with every offer.
+Get pre-approved (not just pre-qualified) before making offers. Sellers take this seriously—it shows you’re buyer-ready. Include pre-approval letter with every offer.
 
 Know your walk-away number. Calculate maximum price you can afford, account for potential repairs, and commit to that limit. Emotion is your enemy in bidding wars.
 
@@ -304,10 +304,10 @@ Include escalation clauses (up to X price if other offers appear). Position your
 **Appraisal Gap Strategy**
 Appraisals often come in low in competitive markets. Offer to cover up to $10,000-20,000 of the gap (depending on your budget). This removes sellers' worry about financing falling through.
 
-Example: Offer $485,000 with escalation to $495,000 if other offers appear, but only if appraisal doesn't create gap. If appraisal comes in at $475,000, you cover $5,000 of the gap, bringing actual price to $480,000.
+Example: Offer $485,000 with escalation to $495,000 if other offers appear, but only if appraisal doesn’t create gap. If appraisal comes in at $475,000, you cover $5,000 of the gap, bringing actual price to $480,000.
 
 **Red Flags in Bidding Wars**
-Don't get emotionally attached. If you're bidding against 5 other offers, that home isn't necessarily special—the market is. Walk away if price exceeds appraisal + your safety margin.
+Don't get emotionally attached. If you’re bidding against 5 other offers, that home isn't necessarily special—the market is. Walk away if price exceeds appraisal + your safety margin.
 
 Waiving inspection is rarely wise, even in hot markets. Home problems can cost you $20,000+. Negotiate inspection instead.
 
@@ -323,7 +323,7 @@ The goal is getting the home at fair market value, not the highest price. Use in
       content: `"Renting is throwing money away" and "Buying is always better" are both wrong. The answer depends on your specific situation, timeline, and local market. Here's the real financial analysis.
 
 **The Renting Advantage**
-Rent is predictable. You budget $1,500/month, and that's your housing cost (plus utilities). No surprise $5,000 roof repairs or foundation issues.
+Rent is predictable. You budget $1,500/month, and that’s your housing cost (plus utilities). No surprise $5,000 roof repairs or foundation issues.
 
 Flexibility is huge. Job change? Move easily. Bought wrong house? You're stuck for years. Renters pivot quickly.
 
@@ -332,9 +332,9 @@ Maintenance-free living. No property taxes, insurance, HOA fees, or yard work. Y
 Lower upfront cost. Deposit is typically 1 month's rent. No down payment, no closing costs.
 
 **The Buying Advantage**
-Building equity. Every payment builds your ownership stake (assuming prices don't crash). Rent builds your landlord's equity.
+Building equity. Every payment builds your ownership stake (assuming prices don’t crash). Rent builds your landlord's equity.
 
-Mortgage stability. If you lock 6% for 30 years, you're protected from inflation. Rent increases 3-5% annually, compounding over decades.
+Mortgage stability. If you lock 6% for 30 years, you’re protected from inflation. Rent increases 3-5% annually, compounding over decades.
 
 Tax benefits. Mortgage interest and property taxes are deductible (if you itemize). Saves $3,000-5,000+ annually for many homeowners.
 
@@ -351,9 +351,9 @@ Over 10 years:
 • Buyer: Paid $448,920 (principal + costs). Home appreciated 4%/year to $745,000. Equity = $645,000 (minus ~$200k remaining mortgage) = $445,000 net.
 • Renter: Paid $288,000. Zero equity. $288,000 in savings if invested at 7% return = $565,000.
 
-Surprisingly close! The renter needs discipline to invest the difference. Most don't.
+Surprisingly close! The renter needs discipline to invest the difference. Most don’t.
 
-Over 30 years, buying typically wins if you stay in the home and don't count it as an investment (pure housing cost). But if you move every 5-7 years, you lose 7-10% of sale price to transaction costs, making renting competitive.
+Over 30 years, buying typically wins if you stay in the home and don’t count it as an investment (pure housing cost). But if you move every 5-7 years, you lose 7-10% of sale price to transaction costs, making renting competitive.
 
 **Decision Framework**
 Buy if:
@@ -368,7 +368,7 @@ Rent if:
 • You prefer flexibility over ownership
 • Local rent-to-price ratio is low (buying is expensive)
 
-There's no universal "right" answer. Run your numbers.`,
+There’s no universal "right" answer. Run your numbers.`,
       category: 'Buying',
       readTime: '8 min',
     },
@@ -376,7 +376,7 @@ There's no universal "right" answer. Run your numbers.`,
       id: 'investment-property',
       title: 'Investment Property 101: Getting Started in Real Estate Investing',
       preview: 'From evaluating deals to managing properties, learn how to build real estate wealth as an investor.',
-      content: `Real estate investing offers leverage, cash flow, and tax benefits that stock market investing doesn't. But success requires education, capital, and discipline. Here's how to start the right way.
+      content: `Real estate investing offers leverage, cash flow, and tax benefits that stock market investing doesn’t. But success requires education, capital, and discipline. Here's how to start the right way.
 
 **The Two Wealth Paths**
 Appreciation play: Buy low, sell high. Requires identifying undervalued properties and improving them. Requires active work but can generate significant returns.
@@ -440,7 +440,7 @@ Real estate isn't passive. Properties require management, maintenance, and probl
       id: 'moving-checklist',
       title: 'Moving Checklist: 30 Days to a Smooth Move',
       preview: 'Timeline and checklist to ensure nothing falls through the cracks when moving to your new home.',
-      content: `Moving is stressful, but a solid 30-day timeline ensures you don't forget critical tasks. Here's your day-by-day guide to a smooth transition.
+      content: `Moving is stressful, but a solid 30-day timeline ensures you don’t forget critical tasks. Here's your day-by-day guide to a smooth transition.
 
 **8 Weeks Before Moving**
 • Research and get estimates from 3-5 moving companies
@@ -515,7 +515,7 @@ Real estate isn't passive. Properties require management, maintenance, and probl
 **Pro Tips**
 Label boxes by room and contents. "Kitchen-Dishes-Box 3" is infinitely more helpful than "Box 47."
 
-Pack a "Don't Move" box with things you'll need immediately but won't need during the move itself.
+Pack a "Don't Move" box with things you’ll need immediately but won’t need during the move itself.
 
 Take photos of electronics setup before disconnecting (for reconnection at new home).
 

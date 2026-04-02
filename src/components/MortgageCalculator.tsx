@@ -955,7 +955,7 @@ export default function MortgageCalculator() {
 
                 <div style={resultItemStyle}>
                   <span style={resultLabelStyle}>Credit Score</span>
-                  <span style={resultValueStyle}}>
+                  <span style={resultValueStyle}>
                     {creditScore === 580 && 'Poor'}
                     {creditScore === 650 && 'Fair'}
                     {creditScore === 700 && 'Good'}
@@ -1101,7 +1101,7 @@ export default function MortgageCalculator() {
 
                 <div style={resultItemStyle}>
                   <span style={resultLabelStyle}>Break-Even Point</span>
-                  <span style={resultValueStyle}}>
+                  <span style={resultValueStyle}>
                     {breakEvenMonths > 0
                       ? `${breakEvenMonths} months (${(breakEvenMonths / 12).toFixed(1)} years)`
                       : monthlySavings > 0 ? 'Immediate' : 'N/A'
