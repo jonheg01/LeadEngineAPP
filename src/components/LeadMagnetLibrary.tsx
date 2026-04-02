@@ -12,7 +12,7 @@ import {
   SectionHeading,
   StatCounter,
 } from './design-system';
-import { LeadCaptureShell } from './LeadCaptureShell';
+import LeadCaptureShell from './LeadCaptureShell';
 
 interface Guide {
   id: string;
