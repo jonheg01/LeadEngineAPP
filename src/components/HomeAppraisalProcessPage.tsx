@@ -16,11 +16,36 @@ export default function HomeAppraisalProcessPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: any) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you! We\u2019ll contact you soon about your home appraisal.');
-    setFormData({ name: '', email: '', phone: '', property: '' });
+    const form = e.target;
+    const formData = new FormData(form);
+    const name = (formData.get('name') as string) || '';
+    const email = (formData.get('email') as string) || '';
+    const phone = (formData.get('phone') as string) || '';
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          source: 'Home Appraisal Process',
+          lead_type: 'Buyer',
+          page_url: typeof window !== 'undefined' ? window.location.pathname : '/homeappraisalprocess',
+          captured_at: new Date().toISOString(),
+        }),
+      });
+      if (res.ok) {
+        form.reset();
+        alert('Thank you! We\u2019ll be in touch soon.');
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch {
+      alert('Something went wrong. Please try again.');
+    }
   };
 
   const faqs = [

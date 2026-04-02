@@ -1,9 +1,10 @@
 'use client';
+
 import { useState } from 'react';
 
 export default function MortgageRefinanceGuidePage() {
   const [expandedFaq, setExpandedFaq] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', type: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleFaqToggle = (index) => {
@@ -17,10 +18,31 @@ export default function MortgageRefinanceGuidePage() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 3000);
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name || '',
+          email: formData.email || '',
+          phone: formData.phone || '',
+          source: 'Mortgage Refinance Guide',
+          lead_type: 'Buyer',
+          page_url: typeof window !== 'undefined' ? window.location.pathname : '',
+          captured_at: new Date().toISOString(),
+        }),
+      });
+      if (res.ok) {
+        setFormSubmitted(true);
+        setTimeout(() => setFormSubmitted(false), 3000);
+        setFormData({ name: '', email: '', phone: '' });
+      }
+    } catch {
+      setFormSubmitted(true);
+      setTimeout(() => setFormSubmitted(false), 3000);
+    }
   };
 
   const faqItems = [

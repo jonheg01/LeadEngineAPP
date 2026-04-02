@@ -245,12 +245,29 @@ export default function RealEstateGlossaryPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.email) {
-      setSubmitted(true);
-      setFormData({ name: '', email: '' });
-      setTimeout(() => setSubmitted(false), 3000);
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name || '',
+          email: formData.email || '',
+          phone: formData.phone || '',
+          source: 'Real Estate Glossary',
+          lead_type: 'Buyer',
+          page_url: typeof window !== 'undefined' ? window.location.pathname : '',
+          captured_at: new Date().toISOString(),
+        }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 3000);
+        setFormData({ name: '', email: '' });
+      }
+    } catch {
+      
     }
   };
 

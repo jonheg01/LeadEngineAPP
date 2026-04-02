@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { getSupabase } from "@/lib/supabase-server";
+import { getNotificationPriority, SPEED_TO_LEAD } from "@/lib/cross-site-config";
+
 // ═══════════════════════════════════════════════════════════
 // /api/leads — Public lead capture endpoint
 // Posts to the same Supabase contacts table used by
-// ContactsPage.tsx and PipelinePage.tsx in the internal app
+// ContactsPage.tsx and PipelinePage.tsx in the internal app.
+// Now also creates real-time notifications + webhook events.
 // ═══════════════════════════════════════════════════════════
-
-
 
 interface LeadPayload {
   name: string;
@@ -27,9 +27,72 @@ interface LeadPayload {
   page_url?: string;
 }
 
+async function createNotification(
+  supabase: ReturnType<typeof getSupabase>,
+  contactId: string,
+  payload: LeadPayload,
+  isReturn: boolean
+) {
+  const source = payload.source || "Website";
+  const priority = getNotificationPriority(source, payload.lead_type);
+  const speedTarget = SPEED_TO_LEAD[priority];
+
+  const title = isReturn
+    ? `Return Visit: ${payload.name}`
+    : priority === "critical" || priority === "high"
+      ? `HOT LEAD: ${payload.name} — ${speedTarget.label}`
+      : `New Lead: ${payload.name}`;
+
+  const bodyParts: string[] = [];
+  bodyParts.push(`Source: ${source}`);
+  if (payload.email) bodyParts.push(payload.email);
+  if (payload.phone) bodyParts.push(payload.phone);
+  if (payload.lead_type) bodyParts.push(`Type: ${payload.lead_type}`);
+  if (priority === "critical" || priority === "high") bodyParts.push(speedTarget.label);
+
+  const type = isReturn
+    ? "return_visit"
+    : priority === "critical"
+      ? "hot_lead"
+      : "new_lead";
+
+  await supabase.from("lead_notifications").insert([{
+    type,
+    priority,
+    title,
+    body: bodyParts.join(" · "),
+    contact_id: contactId,
+    contact_name: payload.name.trim(),
+    contact_email: payload.email.toLowerCase().trim(),
+    source,
+    action_url: `/contacts/${contactId}`,
+    read: false,
+    dismissed: false,
+  }]).then(() => {});
+
+  // Webhook event audit trail
+  await supabase.from("webhook_events").insert([{
+    event: isReturn ? "lead.updated" : "lead.created",
+    source: "public_site",
+    contact_id: contactId,
+    payload: {
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone,
+      source,
+      lead_type: payload.lead_type,
+      utm_source: payload.utm_source,
+      utm_medium: payload.utm_medium,
+      utm_campaign: payload.utm_campaign,
+      pages_viewed: payload.pages_viewed,
+      page_url: payload.page_url,
+      captured_at: payload.captured_at,
+    },
+  }]).then(() => {});
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getSupabase();
     const body: LeadPayload = await request.json();
 
     // ── Validation ──
@@ -40,6 +103,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
     }
 
+    const supabase = getSupabase();
+
     // ── Duplicate detection ──
     const { data: existing } = await supabase
       .from("contacts")
@@ -48,7 +113,6 @@ export async function POST(request: NextRequest) {
       .limit(1);
 
     if (existing && existing.length > 0) {
-      // Update existing contact with new activity
       const contact = existing[0];
       const activityNote = [
         `Return visit via ${body.source || "Website"}`,
@@ -64,11 +128,13 @@ export async function POST(request: NextRequest) {
         preview: activityNote,
       }]);
 
-      // Update last_contacted
       await supabase
         .from("contacts")
         .update({ last_contacted: new Date().toISOString() })
         .eq("id", contact.id);
+
+      // ── Real-time notification for return visit ──
+      await createNotification(supabase, contact.id, body, true);
 
       return NextResponse.json({ ok: true, contactId: contact.id, existing: true });
     }
@@ -92,7 +158,7 @@ export async function POST(request: NextRequest) {
       source: body.source || "Website",
       lead_type: body.lead_type || "Buyer",
       category: "Active Lead",
-      probability: 2, // Hot — they just registered
+      probability: 2,
       notes: [body.notes, utmNotes].filter(Boolean).join("\n\n"),
       city: "",
       state: "AZ",
@@ -166,6 +232,33 @@ export async function POST(request: NextRequest) {
         subject: `New lead captured — ${body.source || "Website"}`,
         preview: `${body.name} registered via ${body.source || "website"}. ${body.phone ? "Phone: " + body.phone : "No phone provided."}`,
       }]);
+
+      // ── Real-time notification for new lead ──
+      await createNotification(supabase, contactId, body, false);
+    }
+
+    // ── Also log to lead_submissions for analytics tracking ──
+    if (contactId) {
+      await supabase.from("lead_submissions").insert([{
+        name: body.name.trim(),
+        email: body.email.toLowerCase().trim(),
+        phone: body.phone?.trim() || "",
+        source_page: body.page_url || "",
+        source_form: body.source || "Website",
+        interest_type: body.lead_type || "Buyer",
+        message: body.notes || "",
+        extra_data: {
+          utm_source: body.utm_source,
+          utm_medium: body.utm_medium,
+          utm_campaign: body.utm_campaign,
+          utm_content: body.utm_content,
+          utm_term: body.utm_term,
+          pages_viewed: body.pages_viewed,
+          listings_viewed: body.listings_viewed,
+        },
+        converted_to_contact: true,
+        contact_id: contactId,
+      }]).then(() => {});
     }
 
     return NextResponse.json({ ok: true, contactId, existing: false });

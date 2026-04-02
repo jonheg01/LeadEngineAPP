@@ -17,11 +17,31 @@ export default function EcoFriendlyLivingPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 3000);
-    setFormData({ name: '', email: '', phone: '', interest: 'general' });
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name || '',
+          email: formData.email || '',
+          phone: formData.phone || '',
+          source: 'Eco Friendly Living',
+          lead_type: 'Buyer',
+          page_url: typeof window !== 'undefined' ? window.location.pathname : '',
+          captured_at: new Date().toISOString(),
+        }),
+      });
+      if (res.ok) {
+        setFormSubmitted(true);
+        setTimeout(() => setFormSubmitted(false), 3000);
+        setFormData({ name: '', email: '', phone: '', interest: 'general' });
+      }
+    } catch {
+      setFormSubmitted(true);
+      setTimeout(() => setFormSubmitted(false), 3000);
+    }
   };
 
   const faqItems = [
