@@ -1,11 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
+import { getSupabase } from "@/lib/supabase-server";
 interface ChatRequest {
   message: string;
   sessionId: string;
@@ -102,6 +98,7 @@ function getRouteAndAction(message: string): {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body: ChatRequest = await req.json();
     const { message, sessionId, visitorInfo } = body;
 

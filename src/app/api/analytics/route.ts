@@ -1,11 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
+import { getSupabase } from "@/lib/supabase-server";
 interface AnalyticsEvent {
   event: string;
   category: string;
@@ -24,6 +20,7 @@ interface AnalyticsEvent {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body: AnalyticsEvent = await req.json();
     const { event, category, action, label, value, utm, referrer, page } = body;
 

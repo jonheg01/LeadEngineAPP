@@ -1,11 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
+import { getSupabase } from "@/lib/supabase-server";
 interface AlertRequest {
   email: string;
   name: string;
@@ -27,6 +23,7 @@ function generateAlertId(): string {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body: AlertRequest = await req.json();
     const { email, name, criteria, frequency } = body;
 

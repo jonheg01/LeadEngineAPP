@@ -1,17 +1,13 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
+import { getSupabase } from "@/lib/supabase-server";
 // ═══════════════════════════════════════════════════════════
 // /api/leads — Public lead capture endpoint
 // Posts to the same Supabase contacts table used by
 // ContactsPage.tsx and PipelinePage.tsx in the internal app
 // ═══════════════════════════════════════════════════════════
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-// Use service role for server-side inserts (bypasses RLS)
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 interface LeadPayload {
   name: string;
@@ -33,6 +29,7 @@ interface LeadPayload {
 
 export async function POST(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body: LeadPayload = await request.json();
 
     // ── Validation ──

@@ -1,11 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
+import { getSupabase } from "@/lib/supabase-server";
 interface QuizAnswers {
   intent: "buying" | "selling" | "exploring";
   budget?: number;
@@ -60,6 +56,7 @@ function generateProfileSummary(answers: QuizAnswers): string {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body: QuizRequest = await req.json();
     const { answers, contact } = body;
 
