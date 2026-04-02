@@ -4,6 +4,7 @@ import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
 import HotLeadNudge from "@/components/HotLeadNudge";
 import AnalyticsShell from "@/components/AnalyticsShell";
+import Providers from "@/components/Providers";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -75,11 +76,13 @@ export default function RootLayout({
             "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
         }}
       >
-        <AnalyticsShell>
-          {children}
-          <ChatWidget />
-          <HotLeadNudge />
-        </AnalyticsShell>
+        <Providers>
+          <AnalyticsShell>
+            {children}
+            <ChatWidget />
+            <HotLeadNudge />
+          </AnalyticsShell>
+        </Providers>
       </body>
     </html>
   );

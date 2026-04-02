@@ -3,7 +3,18 @@
 import React, { useState } from "react";
 import { useMobile } from "@/hooks/useMobile";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useAgentContext } from "@/contexts/AgentSettingsContext";
 import { Icon, Button, Card, Input, SectionHeading, Badge } from "./design-system";
+
+// ═══════════════════════════════════════════════════════════
+// Phone formatter helper
+function formatPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+  if (digits.length === 11 && digits[0] === '1') return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+  return phone;
+}
+// ═══════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════════════
 // ContactPage — Multi-purpose contact & inquiry form
@@ -16,6 +27,7 @@ type ContactMethod = "Email" | "Phone" | "Text";
 
 export default function ContactPage() {
   const isMobile = useMobile();
+  const { settings } = useAgentContext();
   const [trustRef, trustVisible] = useScrollReveal();
   const [formRef, formVisible] = useScrollReveal();
 
@@ -404,7 +416,7 @@ export default function ContactPage() {
                       <div>
                         <div style={{ fontSize: 12, color: "var(--le-text-secondary)", marginBottom: 2 }}>Phone</div>
                         <div style={{ fontSize: 15, fontWeight: 600, color: "var(--le-text-primary)" }}>
-                          (480) 555-0100
+                          {formatPhone(settings.phone || "")}
                         </div>
                       </div>
                     </div>

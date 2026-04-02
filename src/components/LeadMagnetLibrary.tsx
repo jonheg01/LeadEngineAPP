@@ -322,10 +322,6 @@ export function LeadMagnetLibrary({ featured = false }: LeadMagnetLibraryProps) 
                   <Icon name="document" size={14} />
                   <span>{guide.pages} pages</span>
                 </div>
-                <div style={metaItemStyles}>
-                  <Icon name="download" size={14} />
-                  <span>{guide.downloadCount.toLocaleString()} downloads</span>
-                </div>
               </div>
 
               <Button

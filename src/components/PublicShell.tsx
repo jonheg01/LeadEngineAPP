@@ -2,7 +2,18 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useMobile } from "@/hooks/useMobile";
+import { useAgentContext } from "@/contexts/AgentSettingsContext";
 import { Icon, Button } from "./design-system";
+
+// ═══════════════════════════════════════════════════════════
+// Phone formatter helper
+function formatPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+  if (digits.length === 11 && digits[0] === '1') return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+  return phone;
+}
+// ═══════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════════════
 // PublicShell — Layout wrapper for all public-facing pages
@@ -20,66 +31,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Search Homes", href: "/search" },
   { label: "Home Value", href: "/home-value" },
   { label: "Neighborhoods", href: "/neighborhoods" },
-  { label: "Mortgage Calc", href: "/mortgage-calculator" },
-  { label: "Blog", href: "/blog" },
-  { label: "Testimonials", href: "/testimonials" },
   { label: "About", href: "/about" },
-  { label: "Market Reports", href: "/market-reports" },
-  { label: "Meet the Agent", href: "/agent" },
-  { label: "Resources", href: "/resources" },
-  { label: "Seller Guide", href: "/seller-guide" },
-  { label: "Buyer Guide", href: "/buyer-guide" },
-  { label: "Investor Guide", href: "/investor-guide" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Service Areas", href: "/service-areas" },
-  { label: "Relocation", href: "/relocation-guide" },
-  { label: "Pre-Approval", href: "/pre-approval" },
-  { label: "First-Time Buyers", href: "/first-time-buyer" },
-  { label: "Home Maintenance", href: "/home-maintenance" },
-  { label: "Moving Checklist", href: "/moving-checklist" },
-  { label: "Rent vs Buy", href: "/rent-vs-buy" },
-  { label: "Downsizing", href: "/downsizing-guide" },
-  { label: "Home Insurance", href: "/home-insurance" },
-  { label: "Closing Costs", href: "/closing-costs" },
-  { label: "Property Taxes", href: "/property-taxes" },
-  { label: "Appraisals", href: "/home-appraisal" },
-  { label: "Credit Score", href: "/credit-score" },
-  { label: "Inspections", href: "/home-inspection" },
-  { label: "HOA Guide", href: "/hoa-guide" },
-  { label: "Mortgage Types", href: "/mortgage-types" },
-  { label: "Escrow Guide", href: "/escrow-guide" },
-    { label: "Title Insurance", href: "/title-insurance" },
-    { label: "Home Staging", href: "/home-staging" },
-    { label: "VA Home Buying", href: "/veteran-home-buyer" },
-    { label: "Senior Moving Guide", href: "/senior-moving-guide" },
-    { label: "New Construction", href: "/new-construction" },
-    { label: "Foreclosure Guide", href: "/foreclosure-guide" },
-    { label: "Condo Guide", href: "/condo-guide" },
-    { label: "Home Warranty", href: "/home-warranty" },
-    { label: "Luxury Homes", href: "/luxury-homes" },
-    { label: "Green Homes", href: "/green-homes" },
-    { label: "Multi-Generational", href: "/multi-generational" },
-    { label: "Renovation ROI", href: "/renovation-roi" },
-    { label: "Pet-Friendly Homes", href: "/pet-friendly" },
-    { label: "Smart Homes", href: "/smart-homes" },
-    { label: "Remote Work Homes", href: "/remote-work-homes" },
-    { label: "Historic Homes", href: "/historic-homes" },
-    { label: "Downsizing Guide", href: "/downsizing-guide" },
-    { label: "Home Office Guide", href: "/home-office-guide" },
-    { label: "Eco-Friendly Living", href: "/eco-friendly-living" },
-    { label: "First-Time Investor", href: "/first-time-investor" },
-    { label: "Relocation Checklist", href: "/relocation-checklist" },
-    { label: "Home Insurance Guide", href: "/home-insurance-guide" },
-    { label: "Appraisal Process", href: "/appraisal-process" },
-    { label: "Refinance Guide", href: "/refinance-guide" },
-    { label: "Home Buying Myths", href: "/home-buying-myths" },
-    { label: "Seasonal Buying Guide", href: "/seasonal-buying-guide" },
-    { label: "Moving With Pets", href: "/moving-with-pets" },
-    { label: "Home Equity Guide", href: "/home-equity-guide" },
-    { label: "RE Glossary", href: "/real-estate-glossary" },
-    { label: "Neighborhood Safety", href: "/neighborhood-safety" },
-    { label: "Maintenance Calendar", href: "/home-maintenance-calendar" },
-    { label: "Choose an Agent", href: "/choose-an-agent" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
@@ -100,6 +52,7 @@ export default function PublicShell({
   onCtaClick,
 }: PublicShellProps) {
   const isMobile = useMobile();
+  const { settings } = useAgentContext();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -236,7 +189,7 @@ export default function PublicShell({
                 onClick={onCtaClick}
                 style={{ marginLeft: 8 }}
               >
-                (480) 555-0100
+                {settings.phone ? formatPhone(settings.phone) : "Contact Us"}
               </Button>
             )}
           </div>
@@ -320,7 +273,7 @@ export default function PublicShell({
             ))}
             <div style={{ marginTop: 24 }}>
               <Button variant="primary" size="lg" fullWidth icon="phone" onClick={onCtaClick}>
-                Call (480) 555-0100
+                {settings.phone ? `Call ${formatPhone(settings.phone)}` : "Contact Us"}
               </Button>
             </div>
           </div>
@@ -457,11 +410,11 @@ export default function PublicShell({
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                   <Icon name="phone" size={16} color="var(--le-gold)" />
-                  <span style={{ fontSize: 14 }}>(480) 555-0100</span>
+                  <span style={{ fontSize: 14 }}>{settings.phone ? formatPhone(settings.phone) : ""}</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                   <Icon name="mail" size={16} color="var(--le-gold)" />
-                  <span style={{ fontSize: 14 }}>team@leadengine.com</span>
+                  <span style={{ fontSize: 14 }}>{settings.email || ""}</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                   <Icon name="mapPin" size={16} color="var(--le-gold)" />
@@ -490,6 +443,7 @@ export default function PublicShell({
               <a href="#" style={{ color: "inherit", textDecoration: "none" }}>Privacy Policy</a>
               <a href="#" style={{ color: "inherit", textDecoration: "none" }}>Terms of Service</a>
               <a href="#" style={{ color: "inherit", textDecoration: "none" }}>Fair Housing</a>
+              <a href="https://realtyclientengine.com/login" style={{ color: "inherit", textDecoration: "none" }}>Agent Login</a>
             </div>
           </div>
         </div>

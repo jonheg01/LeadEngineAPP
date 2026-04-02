@@ -619,7 +619,7 @@ interface QuizResultsProps {
 }
 
 function QuizResults({ answers, listings }: QuizResultsProps) {
-  const matchCount = Math.floor(Math.random() * 47) + 23; // 23-70 matches
+  const matchCount = listings.length;
 
   return (
     <div>

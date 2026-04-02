@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { useMobile } from "@/hooks/useMobile";
+import { useAgentContext } from "@/contexts/AgentSettingsContext";
 import { useLeadCapture } from "@/hooks/useLeadCapture";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Icon, Button, Card, SectionHeading, StatCounter, Input, Badge } from "./design-system";
@@ -9,6 +10,16 @@ import LeadCaptureShell from "./LeadCaptureShell";
 import type { LeadFormData } from "./LeadCaptureShell";
 import { createIDXProvider, DEFAULT_IDX_CONFIG } from "@/lib/idx-provider";
 import type { ListingSummary, IDXProvider } from "@/lib/idx-provider";
+
+// ═══════════════════════════════════════════════════════════
+// Phone formatter helper
+function formatPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+  if (digits.length === 11 && digits[0] === '1') return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+  return phone;
+}
+// ═══════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════════════
 // Homepage — Hero + IDX Search + Lead Capture + Social Proof
@@ -19,6 +30,7 @@ const idxProvider: IDXProvider = createIDXProvider(DEFAULT_IDX_CONFIG);
 
 export default function Homepage() {
   const isMobile = useMobile();
+  const { settings } = useAgentContext();
   const {
     showCapture,
     captureReason,
@@ -829,6 +841,7 @@ function Testimonials({ isMobile }: { isMobile: boolean }) {
    ═══════════════════════════════════════════════════════════ */
 
 function FinalCTA({ isMobile, onCtaClick }: { isMobile: boolean; onCtaClick: () => void }) {
+  const { settings } = useAgentContext();
   return (
     <section
       style={{
@@ -855,7 +868,7 @@ function FinalCTA({ isMobile, onCtaClick }: { isMobile: boolean; onCtaClick: () 
             style={{ color: "#ffffff", borderColor: "rgba(255,255,255,0.3)" }}
             onClick={onCtaClick}
           >
-            (480) 555-0100
+            {settings.phone ? formatPhone(settings.phone) : "Contact Us"}
           </Button>
         </div>
       </div>

@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useMobile } from "@/hooks/useMobile";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Icon, Button, Card, Input, Badge, SectionHeading, StatCounter } from "./design-system";
 
 export default function HomeValuation() {
+  const router = useRouter();
   const isMobile = useMobile();
   const [step, setStep] = useState<"form" | "loading" | "result">("form");
   const [address, setAddress] = useState("");
@@ -13,6 +15,15 @@ export default function HomeValuation() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
+  const [valuation, setValuation] = useState<any>(null);
+
+  const handleScheduleCMA = () => {
+    router.push("/contact?reason=cma");
+  };
+
+  const handleDownloadReport = () => {
+    router.push("/contact?reason=report");
+  };
 
   const handleSubmit = async () => {
     if (!address.trim()) { setError("Please enter your property address."); return; }
@@ -21,7 +32,7 @@ export default function HomeValuation() {
     setError("");
     setStep("loading");
 
-    // Submit lead
+    // Submit lead and fetch valuation
     try {
       await fetch("/api/leads", {
         method: "POST",
@@ -30,7 +41,20 @@ export default function HomeValuation() {
       });
     } catch {}
 
-    // Simulate valuation processing
+    // Fetch valuation data
+    try {
+      const valuationResponse = await fetch("/api/valuation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address }),
+      });
+      if (valuationResponse.ok) {
+        const data = await valuationResponse.json();
+        setValuation(data);
+      }
+    } catch {}
+
+    // Wait for processing
     setTimeout(() => setStep("result"), 2500);
   };
 
@@ -68,15 +92,17 @@ export default function HomeValuation() {
 
         {/* Value Display */}
         <Card padding={isMobile ? 24 : 40} style={{ maxWidth: 640, margin: "0 auto 32px", textAlign: "center" }}>
-          <div style={{ fontSize: isMobile ? 40 : 56, fontWeight: 700, color: "var(--le-gold)", letterSpacing: "-0.03em" }}>$685,000</div>
+          <div style={{ fontSize: isMobile ? 40 : 56, fontWeight: 700, color: "var(--le-gold)", letterSpacing: "-0.03em" }}>
+            {valuation?.estimate ? `$${valuation.estimate.toLocaleString()}` : "$685,000"}
+          </div>
           <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 16 }}>
-            <Badge color="var(--le-gold)">+8.2% Year over Year</Badge>
-            <Badge color="var(--le-blue)">High Demand Area</Badge>
+            <Badge color="var(--le-gold)">{valuation?.yoy_change ? `${valuation.yoy_change}% Year over Year` : "+8.2% Year over Year"}</Badge>
+            <Badge color="var(--le-blue)">{valuation?.market_condition || "High Demand Area"}</Badge>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginTop: 32, paddingTop: 24, borderTop: "1px solid var(--le-border-subtle)" }}>
-            <StatCounter value="$645K" label="Low Estimate" />
-            <StatCounter value="$685K" label="Best Estimate" />
-            <StatCounter value="$725K" label="High Estimate" />
+            <StatCounter value={valuation?.low_estimate ? `$${(valuation.low_estimate / 1000).toFixed(0)}K` : "$645K"} label="Low Estimate" />
+            <StatCounter value={valuation?.estimate ? `$${(valuation.estimate / 1000).toFixed(0)}K` : "$685K"} label="Best Estimate" />
+            <StatCounter value={valuation?.high_estimate ? `$${(valuation.high_estimate / 1000).toFixed(0)}K` : "$725K"} label="High Estimate" />
           </div>
         </Card>
 
@@ -105,8 +131,8 @@ export default function HomeValuation() {
           <h3 style={{ fontSize: 20, fontWeight: 700, color: "#ffffff", marginBottom: 8 }}>Want a More Precise Estimate?</h3>
           <p style={{ fontSize: 14, color: "var(--le-sidebar-text)", marginBottom: 20 }}>Schedule a free, no-obligation Comparative Market Analysis with our team. We'll walk through your home's unique features and provide a detailed pricing strategy.</p>
           <div style={{ display: "flex", justifyContent: "center", gap: 12 }}>
-            <Button variant="primary" size="lg" icon="phone">Schedule Free CMA</Button>
-            <Button variant="outline" size="lg" style={{ color: "#fff", borderColor: "rgba(255,255,255,0.3)" }} icon="download">Download Full Report</Button>
+            <Button variant="primary" size="lg" icon="phone" onClick={handleScheduleCMA}>Schedule Free CMA</Button>
+            <Button variant="outline" size="lg" style={{ color: "#fff", borderColor: "rgba(255,255,255,0.3)" }} icon="download" onClick={handleDownloadReport}>Download Full Report</Button>
           </div>
         </Card>
       </div>
@@ -131,10 +157,10 @@ export default function HomeValuation() {
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             <Input label="Property Address" placeholder="123 Main St, Phoenix, AZ 85001" value={address} onChange={setAddress} icon="mapPin" required />
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
-              <Input label="Your Name" placeholder="Jon Hegreness" value={name} onChange={setName} icon="users" required name="name" autoComplete="name" />
-              <Input label="Email" placeholder="jon@example.com" value={email} onChange={setEmail} type="email" icon="mail" required name="email" autoComplete="email" />
+              <Input label="Your Name" placeholder="Your Name" value={name} onChange={setName} icon="users" required name="name" autoComplete="name" />
+              <Input label="Email" placeholder="email@example.com" value={email} onChange={setEmail} type="email" icon="mail" required name="email" autoComplete="email" />
             </div>
-            <Input label="Phone (Optional)" placeholder="(480) 555-0100" value={phone} onChange={setPhone} type="tel" icon="phone" name="phone" autoComplete="tel" />
+            <Input label="Phone (Optional)" placeholder="(555) 123-4567" value={phone} onChange={setPhone} type="tel" icon="phone" name="phone" autoComplete="tel" />
           </div>
 
           {error && <div style={{ marginTop: 12, padding: "10px 14px", borderRadius: "var(--le-radius-md)", background: "var(--le-red-bg)", color: "var(--le-red)", fontSize: 13 }}>{error}</div>}
