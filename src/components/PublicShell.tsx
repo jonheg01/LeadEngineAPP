@@ -46,6 +46,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Credit Score", href: "/credit-score" },
   { label: "Inspections", href: "/home-inspection" },
   { label: "HOA Guide", href: "/hoa-guide" },
+  { label: "Mortgage Types", href: "/mortgage-types" },
+  { label: "Escrow Guide", href: "/escrow-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
