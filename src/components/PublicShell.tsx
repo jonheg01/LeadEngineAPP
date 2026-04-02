@@ -26,6 +26,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "About", href: "/about" },
   { label: "Market Reports", href: "/market-reports" },
   { label: "Meet the Agent", href: "/agent" },
+  { label: "Resources", href: "/resources" },
+  { label: "Seller Guide", href: "/seller-guide" },
   { label: "FAQ", href: "/faq" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Contact", href: "/contact", highlight: true },
