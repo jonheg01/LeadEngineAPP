@@ -36,6 +36,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Pre-Approval", href: "/pre-approval" },
   { label: "First-Time Buyers", href: "/first-time-buyer" },
   { label: "Home Maintenance", href: "/home-maintenance" },
+  { label: "Moving Checklist", href: "/moving-checklist" },
+  { label: "Rent vs Buy", href: "/rent-vs-buy" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
