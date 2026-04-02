@@ -54,6 +54,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Senior Moving Guide", href: "/senior-moving-guide" },
     { label: "New Construction", href: "/new-construction" },
     { label: "Foreclosure Guide", href: "/foreclosure-guide" },
+    { label: "Condo Guide", href: "/condo-guide" },
+    { label: "Home Warranty", href: "/home-warranty" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
