@@ -34,6 +34,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Service Areas", href: "/service-areas" },
   { label: "Relocation", href: "/relocation-guide" },
   { label: "Pre-Approval", href: "/pre-approval" },
+  { label: "First-Time Buyers", href: "/first-time-buyer" },
+  { label: "Home Maintenance", href: "/home-maintenance" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
