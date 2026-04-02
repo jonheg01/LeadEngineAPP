@@ -52,6 +52,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Home Staging", href: "/home-staging" },
     { label: "VA Home Buying", href: "/veteran-home-buyer" },
     { label: "Senior Moving Guide", href: "/senior-moving-guide" },
+    { label: "New Construction", href: "/new-construction" },
+    { label: "Foreclosure Guide", href: "/foreclosure-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
