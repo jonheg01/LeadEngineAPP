@@ -1,8 +1,23 @@
 import PublicShell from "@/components/PublicShell";
-import LeadMagnetLibrary from "@/components/LeadMagnetLibrary";
+import GuidesPage from "@/components/GuidesPage";
+import type { Metadata } from "next";
 
-export const metadata = { title: "Free Real Estate Guides | LeadEngine", description: "Download free guides, checklists, and market reports for Arizona home buyers and sellers." };
+export const metadata: Metadata = {
+  title: "Real Estate Guides & Resources | LeadEngine",
+  description:
+    "Expert guides for home buyers, sellers, and investors. Learn about mortgages, market trends, negotiation strategies, and more from real estate professionals.",
+  openGraph: {
+    title: "Real Estate Guides & Resources | LeadEngine",
+    description:
+      "Expert guides for home buyers, sellers, and investors. Learn about mortgages, market trends, negotiation strategies, and more.",
+    type: "website",
+  },
+};
 
-export default function GuidesPage() {
-  return <PublicShell><LeadMagnetLibrary /></PublicShell>;
+export default function GuidesRoute() {
+  return (
+    <PublicShell>
+      <GuidesPage />
+    </PublicShell>
+  );
 }
