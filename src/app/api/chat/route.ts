@@ -166,10 +166,11 @@ export async function POST(req: NextRequest) {
     };
 
     // Insert into chat_logs table (create if doesn't exist)
-    await supabase.from("chat_logs").insert(chatLog).catch(() => {
+    const { error: chatLogError } = await supabase.from("chat_logs").insert(chatLog);
+    if (chatLogError) {
       // Table may not exist yet, silently fail
       console.log("Chat log table not yet created, skipping log");
-    });
+    }
 
     // Get routing and suggested action
     const { reply, suggestedAction } = getRouteAndAction(cleanMessage);

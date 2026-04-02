@@ -166,12 +166,12 @@ export async function POST(req: NextRequest) {
 
     // Insert tags
     for (const tag of tagsToAdd) {
-      await supabase
+      const { error: tagError } = await supabase
         .from("contact_tags")
-        .insert({ contact_id: contactId, tag })
-        .catch(() => {
-          // Tag may already exist, ignore
-        });
+        .insert({ contact_id: contactId, tag });
+      if (tagError) {
+        // Tag may already exist, ignore
+      }
     }
 
     // Log activity
