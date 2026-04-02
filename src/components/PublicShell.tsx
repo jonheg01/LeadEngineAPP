@@ -32,6 +32,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Investor Guide", href: "/investor-guide" },
   { label: "FAQ", href: "/faq" },
   { label: "Service Areas", href: "/service-areas" },
+  { label: "Relocation", href: "/relocation-guide" },
+  { label: "Pre-Approval", href: "/pre-approval" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
