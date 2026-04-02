@@ -3,21 +3,11 @@ import DownsizingGuidePage from "@/components/DownsizingGuidePage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Downsizing Guide | LeadEngine Real Estate",
-  description:
-    "Complete guide to downsizing your home. Timeline, financial calculator, decluttering tips, and housing options for empty nesters and retirees.",
-  openGraph: {
-    title: "Downsizing Guide | LeadEngine Real Estate",
-    description:
-      "Ready to downsize? Get your 6-month plan, financial calculator, and expert guidance.",
-    type: "website",
-  },
+  title: "Downsizing Your Home Guide | LeadEngine Real Estate",
+  description: "Expert guide to downsizing your home. Learn when to downsize, decluttering tips, financial considerations, and how to find the perfect smaller home.",
+  openGraph: { title: "Downsizing Your Home Guide | LeadEngine Real Estate", description: "Expert guide to downsizing your home — tips, checklist, and financial advice.", type: "website" },
 };
 
 export default function DownsizingGuideRoute() {
-  return (
-    <PublicShell>
-      <DownsizingGuidePage />
-    </PublicShell>
-  );
+  return (<PublicShell><DownsizingGuidePage /></PublicShell>);
 }
