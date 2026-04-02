@@ -40,6 +40,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Rent vs Buy", href: "/rent-vs-buy" },
   { label: "Downsizing", href: "/downsizing-guide" },
   { label: "Home Insurance", href: "/home-insurance" },
+  { label: "Closing Costs", href: "/closing-costs" },
+  { label: "Property Taxes", href: "/property-taxes" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
