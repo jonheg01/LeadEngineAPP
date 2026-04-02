@@ -21,6 +21,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Home Value", href: "/home-value" },
   { label: "Neighborhoods", href: "/neighborhoods" },
   { label: "Mortgage Calc", href: "/mortgage-calculator" },
+  { label: "Testimonials", href: "/testimonials" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
