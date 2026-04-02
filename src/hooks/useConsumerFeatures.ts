@@ -1,7 +1,7 @@
 'use client';
 
 import { useConsumer } from '@/contexts/ConsumerAuthContext';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase-client';
 
 // ═══════════════════════════════════════════════════════════
 // Hook for consumer features: saved listings & saved searches
@@ -17,10 +17,7 @@ interface SavedSearch {
 
 export function useConsumerFeatures() {
   const { user, profile, updateProfile } = useConsumer();
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  // Uses shared singleton from @/lib/supabase-client
 
   // Save a listing (add to favorite_listings)
   const saveListing = async (listingId: string) => {

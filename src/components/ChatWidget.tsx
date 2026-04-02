@@ -13,13 +13,21 @@ interface Message {
 const ChatWidget = () => {
   const isMobile = useMobile();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'bot',
-      text: "Hi! I'm your AI home assistant. I can help you find properties, estimate home values, or answer questions about the Phoenix metro area. What can I help with?",
-      time: new Date(),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  // Initialize the welcome message on client only to prevent hydration mismatch
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length === 0) {
+        return [{
+          role: 'bot',
+          text: "Hi! I'm your AI home assistant. I can help you find properties, estimate home values, or answer questions about the Phoenix metro area. What can I help with?",
+          time: new Date(),
+        }];
+      }
+      return prev;
+    });
+  }, []);
   const [inputValue, setInputValue] = useState('');
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);

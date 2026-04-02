@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useConsumer } from '@/contexts/ConsumerAuthContext';
 import { useConsumerFeatures } from '@/hooks/useConsumerFeatures';
 import { useMobile } from '@/hooks/useMobile';
 import { Card, Button, Input, Icon } from '@/components/design-system';
 import PublicShell from '@/components/PublicShell';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase-client';
 
 // ═══════════════════════════════════════════════════════════
 // Account page: Consumer login/signup with saved searches
@@ -30,13 +30,10 @@ export default function AccountPage() {
   // Google OAuth handler
   const handleGoogleSignIn = async () => {
     try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-      if (!supabaseUrl || !supabaseKey) {
+      if (!supabase) {
         setError('Authentication is not configured');
         return;
       }
-      const supabase = createClient(supabaseUrl, supabaseKey);
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -71,7 +68,7 @@ export default function AccountPage() {
               <div style={{ textAlign: 'center', marginBottom: 40 }}>
                 <h1
                   style={{
-                    fontSize: isMobile ? 28 : 36,
+                    fontSize: 36,
                     fontWeight: 700,
                     color: 'var(--le-text-primary)',
                     marginBottom: 8,
@@ -85,7 +82,7 @@ export default function AccountPage() {
                     color: 'var(--le-text-secondary)',
                   }}
                 >
-                  Welcome back, {profile.name}
+                  Welcome back, {profile.name || 'there'}
                 </p>
               </div>
 
@@ -103,7 +100,7 @@ export default function AccountPage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     <div>
                       <p style={{ fontSize: 12, color: 'var(--le-text-tertiary)', marginBottom: 4 }}>Name</p>
-                      <p style={{ fontSize: 16, color: 'var(--le-text-primary)' }}>{profile.name}</p>
+                      <p style={{ fontSize: 16, color: 'var(--le-text-primary)' }}>{profile.name || '\u2014'}</p>
                     </div>
                     <div>
                       <p style={{ fontSize: 12, color: 'var(--le-text-tertiary)', marginBottom: 4 }}>Email</p>
@@ -261,7 +258,7 @@ export default function AccountPage() {
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <h1
                 style={{
-                  fontSize: isMobile ? 28 : 36,
+                  fontSize: 36,
                   fontWeight: 700,
                   color: 'var(--le-text-primary)',
                   marginBottom: 8,
@@ -396,7 +393,7 @@ export default function AccountPage() {
                   />
                   <Input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password (min 6 characters)"
                     value={password}
                     onChange={setPassword}
                     required

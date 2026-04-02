@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase-client';
 import type { User } from '@supabase/supabase-js';
 
 // ═══════════════════════════════════════════════════════════
@@ -39,11 +39,7 @@ export function ConsumerAuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<ConsumerProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-  const supabase = supabaseUrl && supabaseKey
-    ? createClient(supabaseUrl, supabaseKey)
-    : null;
+  // Uses shared singleton from @/lib/supabase-client
 
   // Initialize auth state and load profile on mount
   useEffect(() => {
