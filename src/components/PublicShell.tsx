@@ -68,6 +68,8 @@ const NAV_LINKS: NavLink[] = [
     { label: "Home Office Guide", href: "/home-office-guide" },
     { label: "Eco-Friendly Living", href: "/eco-friendly-living" },
     { label: "First-Time Investor", href: "/first-time-investor" },
+    { label: "Relocation Checklist", href: "/relocation-checklist" },
+    { label: "Home Insurance Guide", href: "/home-insurance-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
