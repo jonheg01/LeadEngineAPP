@@ -44,6 +44,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Property Taxes", href: "/property-taxes" },
   { label: "Appraisals", href: "/home-appraisal" },
   { label: "Credit Score", href: "/credit-score" },
+  { label: "Inspections", href: "/home-inspection" },
+  { label: "HOA Guide", href: "/hoa-guide" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
