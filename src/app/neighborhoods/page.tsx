@@ -1,8 +1,23 @@
 import PublicShell from "@/components/PublicShell";
-import { NeighborhoodIndex } from "@/components/NeighborhoodPage";
+import NeighborhoodExplorer from "@/components/NeighborhoodExplorer";
+import type { Metadata } from "next";
 
-export const metadata = { title: "Phoenix Metro Neighborhoods | LeadEngine", description: "Explore neighborhoods across the Phoenix metro area with market data and school ratings." };
+export const metadata: Metadata = {
+  title: "Explore Neighborhoods | LeadEngine Real Estate",
+  description:
+    "Discover the perfect neighborhood. Explore market trends, school ratings, walkability scores, lifestyle amenities, and home prices across top communities.",
+  openGraph: {
+    title: "Explore Neighborhoods | LeadEngine Real Estate",
+    description:
+      "Discover the perfect neighborhood with market data, school ratings, and lifestyle insights.",
+    type: "website",
+  },
+};
 
-export default function NeighborhoodsPage() {
-  return <PublicShell><NeighborhoodIndex /></PublicShell>;
+export default function NeighborhoodsRoute() {
+  return (
+    <PublicShell>
+      <NeighborhoodExplorer />
+    </PublicShell>
+  );
 }
