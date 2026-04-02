@@ -42,6 +42,8 @@ const NAV_LINKS: NavLink[] = [
   { label: "Home Insurance", href: "/home-insurance" },
   { label: "Closing Costs", href: "/closing-costs" },
   { label: "Property Taxes", href: "/property-taxes" },
+  { label: "Appraisals", href: "/home-appraisal" },
+  { label: "Credit Score", href: "/credit-score" },
   { label: "Contact", href: "/contact", highlight: true },
 ];
 
